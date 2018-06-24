@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>MinpackDotNet</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="chkder.cs" />
+    <Compile Remove="chkder_.cs" />
+    <Compile Remove="covar.cs" />
+    <Compile Remove="covar1.cs" />
+    <Compile Remove="covar_.cs" />
+    <Compile Remove="dogleg.cs" />
+    <Compile Remove="dogleg_.cs" />
+    <Compile Remove="dpmpar_.cs" />
+    <Compile Remove="enorm_.cs" />
+    <Compile Remove="fdjac1.cs" />
+    <Compile Remove="fdjac1_.cs" />
+    <Compile Remove="fdjac2_.cs" />
+    <Compile Remove="hybrd.cs" />
+    <Compile Remove="hybrd1.cs" />
+    <Compile Remove="hybrd1_.cs" />
+    <Compile Remove="hybrd_.cs" />
+    <Compile Remove="hybrj.cs" />
+    <Compile Remove="hybrj1.cs" />
+    <Compile Remove="hybrj1_.cs" />
+    <Compile Remove="hybrj_.cs" />
+    <Compile Remove="lmder.cs" />
+    <Compile Remove="lmder1.cs" />
+    <Compile Remove="lmder1_.cs" />
+    <Compile Remove="lmder_.cs" />
+    <Compile Remove="lmdif1_.cs" />
+    <Compile Remove="lmdif_.cs" />
+    <Compile Remove="lmpar.cs" />
+    <Compile Remove="lmpar_.cs" />
+    <Compile Remove="lmstr.cs" />
+    <Compile Remove="lmstr1.cs" />
+    <Compile Remove="lmstr1_.cs" />
+    <Compile Remove="lmstr_.cs" />
+    <Compile Remove="qform.cs" />
+    <Compile Remove="qform_.cs" />
+    <Compile Remove="qrfac.cs" />
+    <Compile Remove="qrfac_.cs" />
+    <Compile Remove="qrsolv.cs" />
+    <Compile Remove="qrsolv_.cs" />
+    <Compile Remove="r1mpyq.cs" />
+    <Compile Remove="r1mpyq_.cs" />
+    <Compile Remove="r1updt.cs" />
+    <Compile Remove="r1updt_.cs" />
+    <Compile Remove="rwupdt.cs" />
+    <Compile Remove="rwupdt_.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="cminpack.h" />
+    <None Remove="cminpackP.h" />
+    <None Remove="minpack.h" />
+    <None Remove="minpackP.h" />
+  </ItemGroup>
+
+</Project>

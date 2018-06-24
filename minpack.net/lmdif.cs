@@ -9,7 +9,9 @@ namespace MinpackDotNet
     public partial class Lmdif
     {
 
-        public int lmdif(__cminpack_decl_fcn_mn__ p, int m, int n, double[] x,
+        //__cminpack_attr__
+        //int __cminpack_func__(lmdif)(__cminpack_decl_fcn_mn__ void* p, int m, int n, real *x, 
+        public int lmdif(cminpack_func_mn fcn_mn, void *p, int m, int n, double[] x,
             double[] fvec, double ftol, double xtol, double
             gtol, int maxfev, double epsfcn, double[] diag, int
             mode, double factor, int nprint, out int
@@ -250,7 +252,7 @@ namespace MinpackDotNet
             /*     evaluate the function at the starting point */
             /*     and calculate its norm. */
 
-            iflag = p( m, n, x, fvec, 1);
+            iflag = fcn_mn(p, m, n, x, fvec, 1);
             nfev = 1;
             if (iflag < 0)
             {
@@ -270,8 +272,8 @@ namespace MinpackDotNet
 
                 /*        calculate the jacobian matrix. */
 
-                iflag = fdjac2(__cminpack_param_fcn_mn__ p, m, n, x, fvec, fjac, ldfjac,
-                               epsfcn, wa4);
+                //iflag = fdjac2(__cminpack_param_fcn_mn__ p, m, n, x, fvec, fjac, ldfjac, epsfcn, wa4);
+                iflag = fdjac2(fcn_mn, p, m, n, x, fvec, fjac, ldfjac, epsfcn, wa4);
                 *nfev += n;
                 if (iflag < 0)
                 {

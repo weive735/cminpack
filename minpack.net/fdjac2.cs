@@ -6,8 +6,9 @@ namespace MinpackDotNet
 
     partial class Fdjac
     {
-
-        internal static int fdjac2(__cminpack_decl_fcn_mn__ p, int m, int n, double[] x,
+        //__cminpack_attr__
+        //int __cminpack_func__(fdjac2)(__cminpack_decl_fcn_mn__ void* p, int m, int n, real *x, 
+        internal static int fdjac2(cminpack_func_mn fcn_mn, void* p, int m, int n, double[] x,
             double[] fvec, ref double[] fjac, int ldfjac,
             double epsfcn, out double wa)
         {
@@ -112,7 +113,8 @@ namespace MinpackDotNet
                    calls made to compute the function from calls made to compute
                    the Jacobian (see fcn() in examples/lmfdrv.c, and how njev
                    is used to compute the number of Jacobian evaluations) */
-                iflag = p( m, n, x, wa, 2);
+                //iflag = fcn_mn(p, m, n, x, wa, 2);
+                iflag = fcn_mn(p, m, n, x, wa, 2);
                 if (iflag < 0)
                 {
                     return iflag;

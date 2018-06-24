@@ -117,7 +117,11 @@ namespace MinpackDotNet
     ///*         if iflag = 2 the result is used to compute the Jacobian by finite differences. */
     ///*         Jacobian computation requires exactly n function calls with iflag = 2. */
     ///* return a negative value to terminate lmdif1/lmdif */
-    public delegate int __cminpack_decl_fcn_mn__(int m, int n, double[] x, double[] fvec);
+    //__minpack_type_fcn_mn__(const int* m, const int* n, const __minpack_real__* x, __minpack_real__* fvec,
+    //                            int* iflag);
+    //typedef int (* cminpack_func_mn) (const int* m, const int* n, const __minpack_real__* x, __minpack_real__* fvec, int* iflag);
+
+    public delegate int cminpack_func_mn(ref int m, ref int n, double[] x, double[] fvec, ref int iflag);
 
     ///* for lmder1 and lmder */
     ///*         if iflag = 1 calculate the functions at x and */

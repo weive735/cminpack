@@ -3,7 +3,9 @@ namespace MinpackDotNet
 
     public partial class Lmdif
     {
-        int lmdif1(__cminpack_decl_fcn_mn__ p, int m, int n, double[] x,
+        //__cminpack_attr__
+        //int __cminpack_func__(lmdif1)(__cminpack_decl_fcn_mn__ void* p, int m, int n, real *x, 
+        int lmdif1(cminpack_func_mn fcn_mn, void* p, int m, int n, double[] x,
             double[] fvec, double tol, int[] iwa,
             double[] wa, int lwa)
         {
@@ -134,7 +136,7 @@ namespace MinpackDotNet
             mode = 1;
             nprint = 0;
             mp5n = m + n * 5;
-            info = __cminpack_func__(lmdif)(__cminpack_param_fcn_mn__ p, m, n, x, fvec, ftol, xtol, gtol, maxfev,
+            info = lmdif(fcn_mn, p, m, n, x, fvec, ftol, xtol, gtol, maxfev,
                 epsfcn, wa, mode, factor, nprint, &nfev, &wa[mp5n],
                     m, iwa, &wa[n], &wa[(n << 1)], &wa[n * 3],
                 &wa[(n << 2)], &wa[n * 5]);

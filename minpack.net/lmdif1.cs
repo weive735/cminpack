@@ -1,147 +1,162 @@
-#include "cminpack.h"
-#include "cminpackP.h"
-
-__cminpack_attr__
-int __cminpack_func__(lmdif1)(__cminpack_decl_fcn_mn__ void *p, int m, int n, real *x, 
-	real *fvec, real tol, int *iwa, 
-	real *wa, int lwa)
+namespace MinpackDotNet
 {
-    /* Initialized data */
+    static partial class Lmdif
+    {
 
-    const real factor = 100.;
+        //#include "cminpack.h"
+        //#include "cminpackP.h"
 
-    int mp5n, mode, nfev;
-    real ftol, gtol, xtol;
-    real epsfcn;
-    int maxfev, nprint;
-    int info;
+        //__cminpack_attr__
+        //int __cminpack_func__(lmdif1)(__cminpack_decl_fcn_mn__ void *p, int m, int n, real *x, 
+        internal static int lmdif1(cminpack_fcn_mn fcn_mn, object p, int m, int n, double[] x,
+            //real *fvec, real tol, int *iwa, 
+            double[] fvec, double tol, int[] iwa,
+            //real *wa, int lwa)
+            double[] wa, int lwa)
+        {
+            /* Initialized data */
 
-/*     ********** */
+            const double factor = 100d;
 
-/*     subroutine lmdif1 */
+            int mp5n, mode, nfev;
+            double ftol, gtol, xtol;
+            double epsfcn;
+            int maxfev, nprint;
+            int info;
 
-/*     the purpose of lmdif1 is to minimize the sum of the squares of */
-/*     m nonlinear functions in n variables by a modification of the */
-/*     levenberg-marquardt algorithm. this is done by using the more */
-/*     general least-squares solver lmdif. the user must provide a */
-/*     subroutine which calculates the functions. the jacobian is */
-/*     then calculated by a forward-difference approximation. */
+            /*     ********** */
 
-/*     the subroutine statement is */
+            /*     subroutine lmdif1 */
 
-/*       subroutine lmdif1(fcn,m,n,x,fvec,tol,info,iwa,wa,lwa) */
+            /*     the purpose of lmdif1 is to minimize the sum of the squares of */
+            /*     m nonlinear functions in n variables by a modification of the */
+            /*     levenberg-marquardt algorithm. this is done by using the more */
+            /*     general least-squares solver lmdif. the user must provide a */
+            /*     subroutine which calculates the functions. the jacobian is */
+            /*     then calculated by a forward-difference approximation. */
 
-/*     where */
+            /*     the subroutine statement is */
 
-/*       fcn is the name of the user-supplied subroutine which */
-/*         calculates the functions. fcn must be declared */
-/*         in an external statement in the user calling */
-/*         program, and should be written as follows. */
+            /*       subroutine lmdif1(fcn,m,n,x,fvec,tol,info,iwa,wa,lwa) */
 
-/*         subroutine fcn(m,n,x,fvec,iflag) */
-/*         integer m,n,iflag */
-/*         double precision x(n),fvec(m) */
-/*         ---------- */
-/*         calculate the functions at x and */
-/*         return this vector in fvec. */
-/*         ---------- */
-/*         return */
-/*         end */
+            /*     where */
 
-/*         the value of iflag should not be changed by fcn unless */
-/*         the user wants to terminate execution of lmdif1. */
-/*         in this case set iflag to a negative integer. */
+            /*       fcn is the name of the user-supplied subroutine which */
+            /*         calculates the functions. fcn must be declared */
+            /*         in an external statement in the user calling */
+            /*         program, and should be written as follows. */
 
-/*       m is a positive integer input variable set to the number */
-/*         of functions. */
+            /*         subroutine fcn(m,n,x,fvec,iflag) */
+            /*         integer m,n,iflag */
+            /*         double precision x(n),fvec(m) */
+            /*         ---------- */
+            /*         calculate the functions at x and */
+            /*         return this vector in fvec. */
+            /*         ---------- */
+            /*         return */
+            /*         end */
 
-/*       n is a positive integer input variable set to the number */
-/*         of variables. n must not exceed m. */
+            /*         the value of iflag should not be changed by fcn unless */
+            /*         the user wants to terminate execution of lmdif1. */
+            /*         in this case set iflag to a negative integer. */
 
-/*       x is an array of length n. on input x must contain */
-/*         an initial estimate of the solution vector. on output x */
-/*         contains the final estimate of the solution vector. */
+            /*       m is a positive integer input variable set to the number */
+            /*         of functions. */
 
-/*       fvec is an output array of length m which contains */
-/*         the functions evaluated at the output x. */
+            /*       n is a positive integer input variable set to the number */
+            /*         of variables. n must not exceed m. */
 
-/*       tol is a nonnegative input variable. termination occurs */
-/*         when the algorithm estimates either that the relative */
-/*         error in the sum of squares is at most tol or that */
-/*         the relative error between x and the solution is at */
-/*         most tol. */
+            /*       x is an array of length n. on input x must contain */
+            /*         an initial estimate of the solution vector. on output x */
+            /*         contains the final estimate of the solution vector. */
 
-/*       info is an integer output variable. if the user has */
-/*         terminated execution, info is set to the (negative) */
-/*         value of iflag. see description of fcn. otherwise, */
-/*         info is set as follows. */
+            /*       fvec is an output array of length m which contains */
+            /*         the functions evaluated at the output x. */
 
-/*         info = 0  improper input parameters. */
+            /*       tol is a nonnegative input variable. termination occurs */
+            /*         when the algorithm estimates either that the relative */
+            /*         error in the sum of squares is at most tol or that */
+            /*         the relative error between x and the solution is at */
+            /*         most tol. */
 
-/*         info = 1  algorithm estimates that the relative error */
-/*                   in the sum of squares is at most tol. */
+            /*       info is an integer output variable. if the user has */
+            /*         terminated execution, info is set to the (negative) */
+            /*         value of iflag. see description of fcn. otherwise, */
+            /*         info is set as follows. */
 
-/*         info = 2  algorithm estimates that the relative error */
-/*                   between x and the solution is at most tol. */
+            /*         info = 0  improper input parameters. */
 
-/*         info = 3  conditions for info = 1 and info = 2 both hold. */
+            /*         info = 1  algorithm estimates that the relative error */
+            /*                   in the sum of squares is at most tol. */
 
-/*         info = 4  fvec is orthogonal to the columns of the */
-/*                   jacobian to machine precision. */
+            /*         info = 2  algorithm estimates that the relative error */
+            /*                   between x and the solution is at most tol. */
 
-/*         info = 5  number of calls to fcn has reached or */
-/*                   exceeded 200*(n+1). */
+            /*         info = 3  conditions for info = 1 and info = 2 both hold. */
 
-/*         info = 6  tol is too small. no further reduction in */
-/*                   the sum of squares is possible. */
+            /*         info = 4  fvec is orthogonal to the columns of the */
+            /*                   jacobian to machine precision. */
 
-/*         info = 7  tol is too small. no further improvement in */
-/*                   the approximate solution x is possible. */
+            /*         info = 5  number of calls to fcn has reached or */
+            /*                   exceeded 200*(n+1). */
 
-/*       iwa is an integer work array of length n. */
+            /*         info = 6  tol is too small. no further reduction in */
+            /*                   the sum of squares is possible. */
 
-/*       wa is a work array of length lwa. */
+            /*         info = 7  tol is too small. no further improvement in */
+            /*                   the approximate solution x is possible. */
 
-/*       lwa is a positive integer input variable not less than */
-/*         m*n+5*n+m. */
+            /*       iwa is an integer work array of length n. */
 
-/*     subprograms called */
+            /*       wa is a work array of length lwa. */
 
-/*       user-supplied ...... fcn */
+            /*       lwa is a positive integer input variable not less than */
+            /*         m*n+5*n+m. */
 
-/*       minpack-supplied ... lmdif */
+            /*     subprograms called */
 
-/*     argonne national laboratory. minpack project. march 1980. */
-/*     burton s. garbow, kenneth e. hillstrom, jorge j. more */
+            /*       user-supplied ...... fcn */
 
-/*     ********** */
+            /*       minpack-supplied ... lmdif */
 
-/*     check the input parameters for errors. */
+            /*     argonne national laboratory. minpack project. march 1980. */
+            /*     burton s. garbow, kenneth e. hillstrom, jorge j. more */
 
-    if (n <= 0 || m < n || tol < 0. || lwa < m * n + n * 5 + m) {
-        return 0;
+            /*     ********** */
+
+            /*     check the input parameters for errors. */
+
+            if (n <= 0 || m < n || tol < 0d || lwa < m * n + n * 5 + m)
+            {
+                return 0;
+            }
+
+            /*     call lmdif. */
+
+            maxfev = (n + 1) * 200;
+            ftol = tol;
+            xtol = tol;
+            gtol = 0d;
+            epsfcn = 0d;
+            mode = 1;
+            nprint = 0;
+            mp5n = m + n * 5;
+            //info = lmdif(fcn_mn, p, m, n, x, fvec, ftol, xtol, gtol, maxfev,
+            //    epsfcn, wa, mode, factor, nprint, &nfev, &wa[mp5n],
+            //        m, iwa, &wa[n], &wa[(n << 1)], &wa[n * 3],
+            //    &wa[(n << 2)], &wa[n * 5]);
+            info = lmdif(fcn_mn, p, m, n, x, fvec, ftol, xtol, gtol, maxfev,
+                epsfcn, wa, mode, factor, nprint, out nfev, &wa[mp5n],
+                    m, iwa, &wa[n], &wa[(n << 1)], &wa[n * 3],
+                &wa[(n << 2)], &wa[n * 5]);
+            if (info == 8)
+            {
+                info = 4;
+            }
+            return info;
+
+            /*     last card of subroutine lmdif1. */
+
+        } /* lmdif1_ */
     }
-
-/*     call lmdif. */
-
-    maxfev = (n + 1) * 200;
-    ftol = tol;
-    xtol = tol;
-    gtol = 0.;
-    epsfcn = 0.;
-    mode = 1;
-    nprint = 0;
-    mp5n = m + n * 5;
-    info = __cminpack_func__(lmdif)(__cminpack_param_fcn_mn__ p, m, n, x, fvec, ftol, xtol, gtol, maxfev,
-	    epsfcn, wa, mode, factor, nprint, &nfev, &wa[mp5n],
-            m, iwa, &wa[n], &wa[(n << 1)], &wa[n * 3], 
-	    &wa[(n << 2)], &wa[n * 5]);
-    if (info == 8) {
-	info = 4;
-    }
-    return info;
-
-/*     last card of subroutine lmdif1. */
-
-} /* lmdif1_ */
-
+}

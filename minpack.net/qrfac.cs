@@ -220,7 +220,9 @@ namespace MinpackDotNet
             /*     burton s. garbow, kenneth e. hillstrom, jorge j. more */
 
             /*     ********** */
-            (void)lipvt;
+
+#warning What does lipvt mean?
+            //(void)lipvt;
 
             /*     epsmch is the machine precision. */
 
